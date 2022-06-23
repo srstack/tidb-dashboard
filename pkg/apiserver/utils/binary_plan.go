@@ -11,8 +11,8 @@ import (
 	"github.com/pingcap/tipb/go-tipb"
 )
 
-// GenerateVisualPlan generate visual plan from raw data.
-func GenerateVisualPlan(v string) (*tipb.VisualData, error) {
+// GenerateBinaryPlan generate visual plan from raw data.
+func GenerateBinaryPlan(v string) (*tipb.ExplainData, error) {
 	if v == "" {
 		return nil, nil
 	}
@@ -30,7 +30,7 @@ func GenerateVisualPlan(v string) (*tipb.VisualData, error) {
 	}
 
 	// proto unmarshal
-	visual := &tipb.VisualData{}
+	visual := &tipb.ExplainData{}
 	err = visual.Unmarshal(vpBytes)
 	if err != nil {
 		return nil, err
@@ -38,9 +38,9 @@ func GenerateVisualPlan(v string) (*tipb.VisualData, error) {
 	return visual, nil
 }
 
-func GenerateVisualPlanJSON(v string) (string, error) {
+func GenerateBinaryPlanJSON(v string) (string, error) {
 	// generate vp
-	vp, err := GenerateVisualPlan(v)
+	vp, err := GenerateBinaryPlan(v)
 	if err != nil {
 		return "", err
 	}
