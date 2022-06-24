@@ -4,8 +4,10 @@ package utils
 
 import (
 	"encoding/base64"
-	"encoding/json"
 
+	json "google.golang.org/protobuf/encoding/protojson"
+
+	"github.com/golang/protobuf/proto"
 	"github.com/golang/snappy"
 
 	"github.com/pingcap/tipb/go-tipb"
@@ -50,7 +52,7 @@ func GenerateBinaryPlanJSON(b string) (string, error) {
 	}
 
 	// json marshal
-	bpJSON, err := json.Marshal(bp)
+	bpJSON, err := json.Marshal(proto.MessageV2(bp))
 	if err != nil {
 		return "", err
 	}
